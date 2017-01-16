@@ -1,6 +1,6 @@
 Jae Joon Lee sample code explanation
 
-<Project spec>
+Project spec
 This web application was built for my last project in web application class. The team was
 consisted with me and one other student. The purpose of our app was to build a platform where
 English Premier League(EPL) fans can figure out all the necessary information about the
@@ -13,7 +13,7 @@ service.
 fixture API, and map api called 'Leaflet'. We had to subscribe for the weather API and football
 API, so even compiled, the app will have limited access)
 
-<Sample code snippet that was implemented at my end that would like to explain>
+Sample code snippet that was implemented at my end that would like to explain
 /premierleaguewebproject/premierleagueapp/views.py - home(line 97)
 This function is the core of our app. We first send a http request to the football API, and retrieve
 all the fixture data from the API, overwrite the current one we have on
