@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>EPL Share Your Moments - Matches of Favorite Teams </title>
+{% endblock %}
+
+{% block error %}
+  {% for error in errors %}
+  <p style="color:red">
+  {{error}}
+  </p>
+  {% endfor %}
+{% endblock %}
+
+{% block page-body %}
+ <nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{% url 'home' %}">EPL Share Your Moments!</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="{% url 'home' %}">Home</a></li>
+      <li><a href="{% url 'teams' %}">Teams</a></li>
+      <li class="active"><a href="{% url 'favorite_matches' %}">Matches</a></li> 
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Logged in as {{ user.first_name }} {{ user.last_name }}</a></li>
+      <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+  <h2>Fixtures of Your Favorite Teams</h2>                          
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Home</th>
+        <th>Away</th>
+        <th>Date</th>
+        <th>Result</th>
+        <th>Weather</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for fixture in fixtures %}
+      <tr>
+        <th>
+          <a href="{% url 'view_teampage' fixture.htid %}">
+          <img border="1" src="{% url 'get_picture' fixture.homeTeamId %}" class="img-thumbnail" width="50" height="50">
+          {{fixture.homeTeamName}}
+          </a>
+        </th>
+        <th>
+          <a href="{% url 'view_teampage' fixture.atid %}">
+          <img border="1" src="{% url 'get_picture' fixture.awayTeamId %}" class="img-thumbnail" width="50" height="50">
+          {{fixture.awayTeamName}}
+          </a>
+        </th>
+        <th>
+          {{ fixture.date|date:"M d, Y h:iA O T" }}
+        </th>
+        <th>
+          {% if fixture.status = 'FINISHED' %}
+          {{fixture.result.goalsHomeTeam}} : {{fixture.result.goalsAwayTeam}}
+          {% endif %}
+        </th>
+        <th>
+          {% if fixture.weather_info.weather != Null %}
+            <img src="/media/weather_icon/{{ fixture.weather_info.weather.0.icon }}.png" />
+            {{ fixture.weather_info.main.temp }}&#8451;
+          {% endif %}
+        </th>
+      {% endfor %}
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+  <footer>
+    <p>&copy; 2016 Carnegie Mellon University</p>
+  </footer>
+
+{% endblock %}
+

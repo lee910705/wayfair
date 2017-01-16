@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>EPL Share Your Moments - {{teamname}} Fan Chat Page </title>
+{% endblock %}
+
+{% block page-header %}
+<h1>Team Fan Page </h1>
+{% endblock %}
+
+{% block page-body %}
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{% url 'home' %}">EPL Share Your Moments!</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="{% url 'home' %}">Home</a></li>
+      <li><a href="{% url 'teams' %}">Teams</a></li>
+      <li><a href="{% url 'favorite_matches' %}">Matches</a></li> 
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Logged in as {{ user.first_name }} {{ user.last_name }}</a></li>
+      <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+    </ul>
+  </div>
+</nav>
+
+<h2>Welcome to {{teamname}} Chat Room!</h2>
+    <div id="chat-body" class="panel panel-default">
+        <div class="panel-heading">Chat Box</div>
+        <div id="msg-list-div" class="panel-body">
+            <ul id="msg-list" class="list-group">
+                {% for obj in chat %}
+                    {% if obj.user == request.user %}
+                        <li class="text-right list-group-item">{{ obj.user }} : {{ obj.message }}</li>
+                    {% else %}
+                        <li class="text-left list-group-item">{{ obj.user }} : {{ obj.message }}</li>
+                    {% endif %}
+                {% empty %}
+                    <li class="text-right list-group-item">No messages yet!</li>
+                {% endfor %}
+                <script>
+                    var chatlist = document.getElementById('msg-list-div');
+                    chatlist.scrollTop = chatlist.scrollHeight;
+                </script>
+            </ul>
+        </div>
+    </div>
+
+    <form id="chat-form" method="post" action="/premierleagueapp/addchat/">
+        <div id="chat-bottom" class="input-group">
+            <input type="text" id="chat-msg" name="chat-msg" class="form-control" size="100" autofocus />
+            <input type="hidden" id="team-id" name="team-id" value="{{ teamid }}"/>
+                <input class="btn btn-default" id="send" type="submit" value="Send" />
+                {% csrf_token %}
+        </div>
+    </form>
+{% endblock %}

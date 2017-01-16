@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>EPL Share Your Moments - Register</title>
+{% endblock %}
+
+{% block error %}
+{% endblock %}
+
+{% block page-body %}
+ <nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{% url 'home' %}">EPL Share Your Moments!</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-circle-arrow-left"></span> Go back</a></li>
+    </ul>
+  </div>
+</nav>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h2>Sign up to share you moments in EPL!</h2>
+        <form enctype="multipart/form-data" method="post" action="{% url 'register' %}">
+          <!--<table> {{form}} </table>
+          {% csrf_token %}
+          <br>
+          <input type="submit" value="Register" />-->
+          {% for field in form %}
+            <div class="input-group">
+              <span class="input-group-addon" style="background-color:#5cb85c; color:white">{{ field.label_tag }}</span>
+              {% if field.name == "password1" or field.name == "password2" %}
+                <input class="form-control" id="{{field.name}}" maxlength="30" name="{{field.name}}" type="password" />
+              {% else %}
+                <input class="form-control" id="{{field.name}}" maxlength="30" name="{{field.name}}" type="text" />
+              {% endif %} 
+              {{ field.errors }}
+          </div>
+          {% endfor %}
+          <input type="submit" class="btn btn-success" value="Register"></input>
+          <input type="hidden" name="next" value="{{ next }}" />
+          {% csrf_token %}
+        </form>
+      </div>
+    </div>
+
+      <footer>
+        <p>&copy; 2016 Carnegie Mellon University</p>
+      </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+{% endblock %}

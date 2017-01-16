@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>EPL Share Your Moments - Login</title>
+{% endblock %}
+
+{% block error %}
+  {% if form.errors %}
+  <p style="color:red">
+  Incorrect user name and password.
+  </p>
+  {% endif %}
+{% endblock %}
+
+{% block page-body %}
+
+ <nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{% url 'home' %}">EPL Share Your Moments!</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <form class="navbar-form navbar-right" method="post" action="{% url 'django.contrib.auth.views.login' %}">
+            {% for field in form %}
+            <div class="input-group">
+                <span class="input-group-addon" style="background-color:#5cb85c; color:white">{{ field.label_tag }}</span>
+                {% if field.name == "password" %}
+                  <input class="form-control" id="{{field.name}}" maxlength="30" name="{{field.name}}" type="password" />
+                {% else %}
+                  <input class="form-control" id="{{field.name}}" maxlength="30" name="{{field.name}}" type="text" />
+                {% endif %} 
+                {{ field.errors }}
+            </div>
+        {% endfor %}
+            <input type="submit" class="btn btn-success" value="Login"></input>
+            <input type="hidden" name="next" value="{{ next }}" />
+            {% csrf_token %}
+          </form>
+    </ul>
+  </div>
+</nav>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Welcome to EPL Share Your Moments!</h1>
+        <h3>Welcome! This is Gawon Lee and Jae Joon Lee's web-app project.</h3>
+        <h3>Please log in to share your moments in EPL!</h3>
+        <h3> If you don't have an account, you can sign up by clicking the button below</h3>
+        <p><a class="btn btn-primary btn-lg" href="{% url 'register' %}" role="button">Sign Up! &raquo;</a></p>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-6">
+          <h2>Convenient soccer match lookup</h2>
+          <p>You can fetch soccer matches based on where you're located, and the weather on match time!</p>
+        </div>
+        <div class="col-md-6">
+          <h2>Follow your favorite teams</h2>
+          <p>Are you fan of one(or more) of EPL teams? You can follow them, and gather league scoreboard, and history of that team! Plus, live chat with users who also follows the same team as you!</p>
+       </div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>&copy; 2016 Carnegie Mellon University</p>
+      </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+{% endblock %}
+

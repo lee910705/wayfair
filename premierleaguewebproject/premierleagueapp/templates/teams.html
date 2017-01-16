@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <title>EPL Share Your Moments - Teams</title>
+{% endblock %}
+
+{% block error %}
+  {% for error in errors %}
+  <p style="color:red">
+  {{error}}
+  </p>
+  {% endfor %}
+{% endblock %}
+
+{% block page-body %}
+ <nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{% url 'home' %}">EPL Share Your Moments!</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="{% url 'home' %}">Home</a></li>
+      <li class="active"><a href="{% url 'teams' %}">Teams</a></li>
+      <li><a href="{% url 'favorite_matches' %}">Matches</a></li> 
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Logged in as {{ user.first_name }} {{ user.last_name }}</a></li>
+      <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+    </ul>
+  </div>
+</nav>
+
+<h2>Choose a team for further information!</h2>
+  <div class="row">
+    <div class="col-lg-2 col-sm-3 col-xs-4">
+        <a href="{% url 'view_teampage' 1 %}">
+             <img src="/media/team/AFC Bournemouth.jpg" class="thumbnail img-responsive">
+        </a>
+    </div>
+     <div class="col-lg-2 col-sm-3 col-xs-4">
+        <a href="{% url 'view_teampage' 2 %}">
+             <img src="/media/team/Arsenal FC.jpg" class="thumbnail img-responsive">
+        </a>
+    </div>
+     <div class="col-lg-2 col-sm-3 col-xs-4">
+        <a href="{% url 'view_teampage' 3 %}">
+             <img src="/media/team/Aston Villa FC.jpg" class="thumbnail img-responsive">
+        </a>
+    </div>
+     <div class="col-lg-2 col-sm-3 col-xs-4">
+        <a href="{% url 'view_teampage' 4 %}">
+             <img src="/media/team/Chelsea FC.jpg" class="thumbnail img-responsive">
+        </a>
+    </div>
+     <div class="col-lg-2 col-sm-3 col-xs-4">
+        <a href="{% url 'view_teampage' 5 %}">
+             <img src="/media/team/Crystal Palace FC.jpg" class="thumbnail img-responsive">
+        </a>
+    </div>
+     <div class="col-lg-2 col-sm-3 col-xs-4">
+        <a href="{% url 'view_teampage' 6 %}">
+             <img src="/media/team/Everton FC.jpg" class="thumbnail img-responsive">
+        </a>
+    </div>
+     <div class="col-lg-2 col-sm-3 col-xs-4">
+        <a href="{% url 'view_teampage' 7 %}">
+             <img src="/media/team/Leicester City FC.jpg" class="thumbnail img-responsive">
+        </a>
+    </div>
+     <div class="col-lg-2 col-sm-3 col-xs-4">
+        <a href="{% url 'view_teampage' 8 %}">
+             <img src="/media/team/Liverpool FC.jpg" class="thumbnail img-responsive">
+        </a>
+    </div>
+    <div class="col-lg-2 col-sm-3 col-xs-4">
+        <a href="{% url 'view_teampage' 9 %}">
+             <img src="/media/team/Manchester City FC.jpg" class="thumbnail img-responsive">
+        </a>
+    </div>
+    <div class="col-lg-2 col-sm-3 col-xs-4">
+        <a href="{% url 'view_teampage' 10 %}">
+             <img src="/media/team/Manchester United FC.jpg" class="thumbnail img-responsive">
+        </a>
+    </div>
+    <div class="col-lg-2 col-sm-3 col-xs-4">
+        <a href="{% url 'view_teampage' 11 %}">
+             <img src="/media/team/Newcastle United FC.jpg" class="thumbnail img-responsive">
+        </a>
+    </div>
+    <div class="col-lg-2 col-sm-3 col-xs-4">
+        <a href="{% url 'view_teampage' 12 %}">
+             <img src="/media/team/Norwich City FC.jpg" class="thumbnail img-responsive">
+        </a>
+    </div>
+    <div class="col-lg-2 col-sm-3 col-xs-4">
+        <a href="{% url 'view_teampage' 13 %}">
+             <img src="/media/team/Southampton FC.jpg" class="thumbnail img-responsive">
+        </a>
+    </div>
+    <div class="col-lg-2 col-sm-3 col-xs-4">
+        <a href="{% url 'view_teampage' 14 %}">
+             <img src="/media/team/Stoke City FC.jpg" class="thumbnail img-responsive">
+        </a>
+    </div>
+    <div class="col-lg-2 col-sm-3 col-xs-4">
+        <a href="{% url 'view_teampage' 15 %}">
+             <img src="/media/team/Sunderland AFC.jpg" class="thumbnail img-responsive">
+        </a>
+    </div>
+    <div class="col-lg-2 col-sm-3 col-xs-4">
+        <a href="{% url 'view_teampage' 16 %}">
+             <img src="/media/team/Swansea City FC.jpg" class="thumbnail img-responsive">
+        </a>
+    </div>
+    <div class="col-lg-2 col-sm-3 col-xs-4">
+        <a href="{% url 'view_teampage' 17 %}">
+             <img src="/media/team/Tottenham Hotspur FC.jpg" class="thumbnail img-responsive">
+        </a>
+    </div>
+    <div class="col-lg-2 col-sm-3 col-xs-4">
+        <a href="{% url 'view_teampage' 18 %}">
+             <img src="/media/team/Watford FC.jpg" class="thumbnail img-responsive">
+        </a>
+    </div>
+    <div class="col-lg-2 col-sm-3 col-xs-4">
+        <a href="{% url 'view_teampage' 19 %}">
+             <img src="/media/team/West Ham United FC.jpg" class="thumbnail img-responsive">
+        </a>
+    </div>
+    <div class="col-lg-2 col-sm-3 col-xs-4">
+        <a href="{% url 'view_teampage' 20 %}">
+             <img src="/media/team/West Bromwich Albion FC.jpg" class="thumbnail img-responsive">
+        </a>
+    </div>
+  </div>
+  <hr>
+  <br><br>
+
+  <footer>
+    <p>&copy; 2016 Carnegie Mellon University</p>
+  </footer>
+{% endblock %}

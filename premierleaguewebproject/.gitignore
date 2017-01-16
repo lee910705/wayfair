@@ -1,0 +1,20 @@
+*.log
+*.pot
+*.pyc
+local_settings.py
+
+# Editor backup files
+*~
+*#
+
+# local setting file
+settings.py
+
+# Django's SQL Lite Database File
+db.sqlite3
+
+# Secret config parameters
+*.ini
+
+*.pem
+

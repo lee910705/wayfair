@@ -1,0 +1,9 @@
+#chat-bottom {
+    position: relative;
+    bottom: 10px;
+}
+
+.panel-body {
+    overflow-y: auto;
+    height: 80%;
+}

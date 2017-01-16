@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>EPL Share Your Moments - {{team.name}} </title>
+{% endblock %}
+
+{% block error %}
+  {% for error in errors %}
+  <p style="color:red">
+  {{error}}
+  </p>
+  {% endfor %}
+{% endblock %}
+
+{% block page-body %}
+ <nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{% url 'home' %}">EPL Share Your Moments!</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="{% url 'home' %}">Home</a></li>
+      <li class="active"><a href="{% url 'teams' %}">Teams</a></li>
+      <li><a href="{% url 'favorite_matches' %}">Matches</a></li> 
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Logged in as {{ user.first_name }} {{ user.last_name }}</a></li>
+      <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+    </ul>
+  </div>
+</nav>
+
+<h2>Welcome to {{team.name}} Fan Page!</h2>
+<br>
+  <div class="row">
+      <div class="col-md-6">
+          <div class="panel-group">
+            <div class="panel panel-primary">
+              <div class="panel-heading"><h4>Team Information</h4></div>
+              <div class="panel-body">
+              <img border="1" src="{{team.picture.url}}" class="img-thumbnail" width="700" height="700">
+                <p>
+                <ul class="list-group">
+                  <li class="list-group-item list-group-item-success"> Team Name: {{team.name}} </li>
+                  <li class="list-group-item list-group-item-info"> Stadium Name: {{team.stadiumname}} </li>
+                  <li class="list-group-item list-group-item-success"> City: {{team.stadiumloc}} </li>
+                  <li class="list-group-item list-group-item-info"> <a href="{% url 'view_teamchat' team.id  %}"> Go to Team Fan Chat! </a> </li>
+                </ul>
+                </p>
+                {% if alreadyfollowed.0 == 'n' %}
+                <a href="{% url 'followteam' team.id %}" type="button" class="btn btn-success active"> Follow </a>
+                {% elif alreadyfollowed.0 == 'y' %}
+                <a href="{% url 'unfollowteam' team.id %}" type="button" class="btn btn-warning active"> Unfollow </a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+      </div>
+  </div>
+
+  <!-- Load jQuery -->
+  <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+  <!-- Load Stats FC Next Fixture SDK -->
+  <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//api.statsfc.com/widget/next-fixture-1.0.js";
+      fjs.parentNode.insertBefore(js, fjs);
+  }(document, "script", "statsfc-next-fixture-js"));</script>
+
+  <!-- Your next-fixture here -->
+  <div class="statsfc-next-fixture"
+      data-key="s6htvQZ7w3f0xC_4ozAboMIpban4r2pt65xAc7bI"
+      data-team="{{team.apiteamname}}"
+      data-competition="EPL"
+      data-timezone="America/New_York"
+      data-omit-errors="false"
+      data-use-default-css="true">
+  </div>
+
+<div class="container">
+  <h2>Fixtures of {{ team.name }}</h2>                          
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Home</th>
+        <th>Away</th>
+        <th>Date</th>
+        <th>Result</th>
+        <th>Weather</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for fixture in fixtures %}
+      <tr>
+        <th>
+          <a href="{% url 'view_teampage' fixture.htid %}">
+          <img border="1" src="{% url 'get_picture' fixture.homeTeamId %}" class="img-thumbnail" width="50" height="50">
+          {{fixture.homeTeamName}}
+          </a>
+        </th>
+        <th>
+          <a href="{% url 'view_teampage' fixture.atid %}">
+          <img border="1" src="{% url 'get_picture' fixture.awayTeamId %}" class="img-thumbnail" width="50" height="50">
+          {{fixture.awayTeamName}}
+          </a>
+        </th>
+        <th>
+          {{ fixture.date|date:"M d, Y h:iA O T" }}
+        </th>
+        <th>
+          {% if fixture.status = 'FINISHED' %}
+          {{fixture.result.goalsHomeTeam}} : {{fixture.result.goalsAwayTeam}}
+          {% endif %}
+        </th>
+        <th>
+          {% if fixture.weather_info.weather != Null %}
+            <img src="/media/weather_icon/{{ fixture.weather_info.weather.0.icon }}.png" />
+            {{ fixture.weather_info.main.temp }}&#8451;
+          {% endif %}
+        </th>
+      {% endfor %}
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+  <footer>
+    <p>&copy; 2016 Carnegie Mellon University</p>
+  </footer>
+
+{% endblock %}
+

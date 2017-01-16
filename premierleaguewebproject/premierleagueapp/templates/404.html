@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>Page Not Found</title>
+{% endblock %}
+
+{% block error %}
+{% endblock %}
+
+{% block page-body %}
+ <nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{% url 'home' %}">EPL</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="{% url 'home' %}"><span class="glyphicon glyphicon-circle-arrow-left"></span> Home </a></li>
+    </ul>
+  </div>
+</nav>
+
+<h2>404 Page is Not Found! Press 'Home' to continue.</h2>
+
+      <footer>
+        <p>&copy; 2016 Carnegie Mellon University</p>
+      </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+{% endblock %}
+
