@@ -53,7 +53,7 @@ simplejson==3.3.1
 six==1.10.0
 ssh-import-id==3.21
 stevedore==1.12.0
-urllib3==1.7.1
+urllib3==1.24.2
 virtualenv==15.0.1
 virtualenv-clone==0.2.6
 virtualenvwrapper==4.7.1
