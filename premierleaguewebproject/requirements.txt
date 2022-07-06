@@ -24,7 +24,7 @@ django-background-task==0.1.8
 django-background-tasks==1.0.11
 django-compat==1.0.10
 django-request==1.4.0
-html5lib==0.999
+html5lib==0.999999999
 httplib2==0.8
 importlib==1.0.3
 jsonpatch==1.3
